@@ -1,0 +1,495 @@
+/* ==========================================================================
+   GAME.CSS - Mystical Divination Game "¿Qué carta Clow eres?" (Horizontal Layout)
+   ========================================================================== */
+
+.game-section {
+  position: relative;
+  padding: 4.5rem 1.5rem 5.5rem 1.5rem;
+  background: radial-gradient(circle at 50% 30%, #2A174A 0%, #170C2E 60%, #0D061A 100%);
+  color: #FFF8FA;
+  overflow: hidden;
+  border-top: 5px solid var(--gold-medium);
+  border-bottom: 5px solid var(--gold-medium);
+}
+
+/* Mystical Background Stars */
+.mystic-stars-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #FFF, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #FFE699, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 90px 40px, #FFF, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #FFD6E8, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 230px 190px, #E0C3FC, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 280px 280px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.game-content-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.game-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 212, 59, 0.15);
+  border: 2px solid var(--gold-medium);
+  color: var(--gold-pastel);
+  padding: 0.3rem 0.9rem;
+  font-family: var(--font-pixel-accent);
+  font-size: 0.72rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 15px rgba(255, 212, 59, 0.3);
+}
+
+.game-title {
+  font-family: var(--font-pixel-title);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--gold-pastel);
+  letter-spacing: 2px;
+  text-shadow: 0 0 12px rgba(255, 212, 59, 0.6), 3px 3px 0px #000000;
+}
+
+.game-subtitle {
+  font-size: 1.1rem;
+  color: var(--lavender-pastel);
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Horizontal Game Arena Layout (PC Desktop Single View)
+   ========================================================================== */
+.game-horizontal-layout {
+  position: relative;
+  width: 100%;
+  background: rgba(30, 18, 51, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 4px solid var(--gold-vibrant);
+  box-shadow: 0 0 35px rgba(255, 212, 59, 0.35), var(--shadow-pixel);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem 2.5rem;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Rotating Magic Rune Background */
+.magic-circle-rune {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 212, 59, 0.25);
+  box-shadow: 
+    0 0 40px rgba(255, 212, 59, 0.1),
+    inset 0 0 40px rgba(224, 195, 252, 0.1);
+  pointer-events: none;
+  animation: rotateRune 45s linear infinite;
+  z-index: 1;
+}
+
+.magic-circle-rune::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(224, 195, 252, 0.2);
+}
+
+@keyframes rotateRune {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ==========================================================================
+   Column 1: Divination Card Display
+   ========================================================================== */
+.game-card-col {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.divination-card-stage {
+  perspective: 1200px;
+  width: 165px;
+  max-width: 100%;
+  aspect-ratio: 1 / 2.22;
+  animation: cardHoverFloat 4s ease-in-out infinite;
+}
+
+.divination-card-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 212, 59, 0.35);
+}
+
+/* Revealed state turns 180deg to display the Clow Card Front */
+.divination-card-3d.revealed {
+  transform: rotateY(180deg);
+}
+
+.divination-card-3d.casting {
+  animation: cardCastSpin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes cardHoverFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes cardCastSpin {
+  0% { transform: rotateY(0deg) scale(1.03); }
+  50% { transform: rotateY(180deg) scale(1.1); filter: drop-shadow(0 0 30px #FFD700); }
+  100% { transform: rotateY(360deg) scale(1.03); }
+}
+
+.divination-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 3px solid var(--gold-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #170C2E;
+}
+
+/* Card Back (Initial State) */
+.divination-back {
+  transform: rotateY(0deg);
+  background: linear-gradient(145deg, #7A1717 0%, #4A0E0E 100%);
+  padding: 0.85rem;
+  border: 3px solid var(--gold-vibrant);
+  z-index: 1;
+}
+
+.clow-back-ornament {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: 2px dashed rgba(255, 212, 59, 0.6);
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+}
+
+.clow-sun-moon-emblem {
+  font-size: 1.4rem;
+  color: var(--gold-pastel);
+  filter: drop-shadow(0 0 8px rgba(255, 212, 59, 0.8));
+}
+
+.clow-seal-text {
+  font-family: var(--font-pixel-accent);
+  font-size: 0.55rem;
+  color: var(--gold-pastel);
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* Card Front (Revealed State with Real Clow Card Image) */
+.divination-front {
+  transform: rotateY(180deg);
+  background: #1E1233;
+  z-index: 2;
+}
+
+.divination-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #170C2E;
+}
+
+.divination-chip-tag {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  padding: 0.15rem 0.45rem;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-family: var(--font-pixel-accent);
+  font-size: 0.55rem;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+.game-card-hint {
+  font-family: var(--font-pixel-title);
+  font-size: 0.75rem;
+  color: var(--gold-pastel);
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Column 2: Information & Action Button
+   ========================================================================== */
+.game-info-col {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+/* Intro State Box */
+.game-intro-box {
+  background: rgba(42, 23, 74, 0.7);
+  border: 2px dashed var(--lavender-medium);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.intro-badge {
+  font-family: var(--font-pixel-accent);
+  font-size: 0.7rem;
+  color: var(--gold-pastel);
+}
+
+.intro-title {
+  font-family: var(--font-pixel-title);
+  font-size: 1.6rem;
+  color: var(--pink-pastel);
+}
+
+.intro-description {
+  font-size: 1rem;
+  color: #F3EBFF;
+  line-height: 1.5;
+}
+
+/* Casting Animation State */
+.game-casting-box {
+  background: rgba(42, 23, 74, 0.9);
+  border: 2px solid var(--gold-medium);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wand-spinner {
+  font-size: 2.2rem;
+  animation: sparkleStar 1s infinite alternate;
+}
+
+.casting-text {
+  font-family: var(--font-pixel-title);
+  font-size: 1.1rem;
+  color: var(--gold-pastel);
+}
+
+/* Result Details Box (Matches Collection Card Structure) */
+.game-details-box {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  border: 3px solid var(--gold-vibrant);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.result-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result-badge {
+  font-family: var(--font-pixel-accent);
+  font-size: 0.68rem;
+  color: var(--pink-dark);
+  background: var(--pink-pastel);
+  border: 1.5px solid var(--pink-vibrant);
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+}
+
+.result-number-badge {
+  font-family: var(--font-pixel-title);
+  font-size: 0.95rem;
+  color: var(--gold-dark);
+  background: var(--gold-pastel);
+  border: 1.5px solid var(--gold-medium);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.result-spanish-name {
+  font-family: var(--font-pixel-title);
+  font-size: 1.9rem;
+  color: var(--pink-dark);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.result-subnames-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: var(--lavender-deep);
+  font-weight: 700;
+}
+
+.result-kanji-romaji {
+  color: var(--text-secondary);
+}
+
+.result-meaning-box {
+  background: rgba(255, 240, 245, 0.85);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  border-left: 3px solid var(--pink-vibrant);
+}
+
+.result-meaning-label {
+  font-family: var(--font-pixel-title);
+  font-size: 0.82rem;
+  color: var(--pink-vibrant);
+  margin-bottom: 0.2rem;
+}
+
+.result-meaning-text {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.result-appearances-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.app-tag {
+  background: #ffffff;
+  border: 1.5px solid var(--pink-pastel);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* Action Button */
+.game-action-wrapper {
+  margin-top: 0.25rem;
+}
+
+.game-action-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #FFD43B 0%, #FAB005 100%);
+  color: #2A174A;
+  font-size: 1.1rem;
+  padding: 0.85rem 1.5rem;
+  border: 3px solid #FFF8FA;
+  box-shadow: 0 0 20px rgba(255, 212, 59, 0.5), 3px 3px 0px #000000;
+  border-radius: 6px;
+}
+
+.game-action-btn:hover {
+  background: #FFF3BF;
+  box-shadow: 0 0 28px rgba(255, 212, 59, 0.8), 5px 5px 0px #000000;
+  transform: translateY(-2px);
+}
+
+.game-action-btn:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+/* ==========================================================================
+   Responsive Game Section
+   ========================================================================== */
+@media (max-width: 768px) {
+  .game-horizontal-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .game-title {
+    font-size: 1.8rem;
+  }
+
+  .divination-card-stage {
+    width: 140px;
+  }
+
+  .result-header-row {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .result-subnames-row {
+    justify-content: center;
+  }
+
+  .result-appearances-row {
+    justify-content: center;
+  }
+}

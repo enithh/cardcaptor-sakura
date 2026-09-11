@@ -1,0 +1,807 @@
+/* ==========================================================================
+   CARDS.CSS - Collection Grid, 3D Flip Card Mechanics, Toggle & Modal
+   ========================================================================== */
+
+/* ==========================================================================
+   Section 2: Collection Container & Header
+   ========================================================================== */
+.collection-section {
+  padding: 5rem 1.5rem 6rem 1.5rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section-title-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.deco-star {
+  color: var(--gold-vibrant);
+  font-size: 1.6rem;
+  animation: sparkleStar 2s ease-in-out infinite alternate;
+}
+
+.section-title {
+  font-family: var(--font-pixel-title);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--pink-dark);
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px var(--pink-pastel);
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Controls Panel (Search, Filters, Toggle)
+   ========================================================================== */
+.controls-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 3px solid var(--pink-pastel);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 10px 30px rgba(248, 180, 217, 0.25);
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+/* Search Bar */
+.search-bar-wrapper {
+  width: 100%;
+}
+
+.search-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.2rem;
+  font-size: 1.2rem;
+  color: var(--pink-vibrant);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.85rem 3rem 0.85rem 3.2rem;
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--text-primary);
+  background: #FFF9FC;
+  border: 2px solid var(--pink-pastel);
+  border-radius: var(--radius-full);
+  box-shadow: inset 0 2px 5px rgba(248, 180, 217, 0.2);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+  border-color: var(--pink-vibrant);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(232, 93, 158, 0.15);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 1.2rem;
+  background: var(--pink-pastel);
+  border: none;
+  color: var(--pink-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.clear-search-btn:hover {
+  background: var(--pink-vibrant);
+  color: #ffffff;
+}
+
+/* Filters and Version Toggle Row */
+.filters-and-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  border-top: 2px dashed var(--pink-pastel);
+  padding-top: 1.15rem;
+}
+
+/* Filter Chips Group */
+.filter-chips-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: #ffffff;
+  border: 2px solid var(--pink-pastel);
+  border-radius: var(--radius-full);
+  font-family: var(--font-pixel-title);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-chip:hover {
+  border-color: var(--pink-vibrant);
+  color: var(--pink-dark);
+  background: var(--pink-pastel);
+  transform: translateY(-1px);
+}
+
+.filter-chip.active {
+  background: var(--pink-vibrant);
+  color: #ffffff;
+  border-color: var(--pink-dark);
+  box-shadow: var(--shadow-pixel-sm);
+}
+
+/* Sakura / Clow Switch Toggle */
+.version-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--pink-pastel);
+  padding: 0.4rem 0.95rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--pink-soft);
+}
+
+.version-label {
+  font-family: var(--font-pixel-title);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.version-label.active {
+  color: var(--pink-dark);
+  text-shadow: 0 0 1px rgba(201, 42, 116, 0.4);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 26px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--pink-vibrant);
+  transition: var(--transition-normal);
+  border-radius: 34px;
+  border: 2px solid #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 2px;
+  background-color: #ffffff;
+  transition: var(--transition-normal);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--lavender-deep);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* ==========================================================================
+   State Displays: Loading, Error, Empty
+   ========================================================================== */
+.state-box {
+  background: #ffffff;
+  border: 3px dashed var(--pink-pastel);
+  border-radius: var(--radius-lg);
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.state-icon {
+  font-size: 3.5rem;
+  animation: gentlePulse 1.8s ease-in-out infinite;
+}
+
+.state-title {
+  font-family: var(--font-pixel-title);
+  font-size: 1.6rem;
+  color: var(--pink-dark);
+}
+
+.state-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+}
+
+.error-state {
+  border-color: #FFA8A8;
+  background: #FFF5F5;
+}
+
+.error-state .state-title {
+  color: #E03131;
+}
+
+/* ==========================================================================
+   Cards Grid (5 Columns on Desktop: 2 rows of 5 = 10 cards initial)
+   ========================================================================== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.25rem;
+  perspective: 1200px;
+}
+
+.card-item {
+  background: #ffffff;
+  border: 2.5px solid var(--pink-pastel);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  box-shadow: 0 6px 16px rgba(248, 180, 217, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+  cursor: pointer;
+}
+
+.card-item:hover {
+  border-color: var(--pink-vibrant);
+  box-shadow: 0 10px 24px rgba(232, 93, 158, 0.3);
+  transform: translateY(-4px);
+}
+
+/* 3D Flip Card Viewport (Shows FULL Card without Cropping) */
+.card-flip-stage {
+  width: 100%;
+  max-width: 130px;
+  aspect-ratio: 1 / 2.22;
+  margin: 0 auto 0.75rem auto;
+  perspective: 1000px;
+  position: relative;
+  border-radius: var(--radius-sm);
+}
+
+.card-flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: var(--radius-sm);
+}
+
+/* HOVER FLIP: When mouse passes over card-item, flip 180deg to show the REVERSO */
+.card-item:hover .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+/* Flip Card Faces */
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--border-pixel);
+  background: #2A174A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Face Front: Active Card Version (Sakura or Clow) */
+.card-face-front {
+  transform: rotateY(0deg);
+}
+
+/* Face Back: Active Card REVERSO */
+.card-face-back {
+  transform: rotateY(180deg);
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.version-chip-tag {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  padding: 0.12rem 0.4rem;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-family: var(--font-pixel-accent);
+  font-size: 0.52rem;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+.reverse-chip-tag {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  padding: 0.12rem 0.4rem;
+  background: rgba(201, 42, 116, 0.88);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-family: var(--font-pixel-accent);
+  font-size: 0.52rem;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+/* Card Information Hierarchy */
+.card-info-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.card-spanish-name {
+  font-family: var(--font-pixel-title);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pink-dark);
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+}
+
+.card-number-badge {
+  font-family: var(--font-pixel-title);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  background: var(--gold-pastel);
+  border: 1.5px solid var(--gold-medium);
+  padding: 0.08rem 0.35rem;
+  border-radius: 4px;
+}
+
+.card-subnames-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--lavender-deep);
+  font-weight: 600;
+}
+
+.card-kanji-romaji {
+  color: var(--text-secondary);
+}
+
+.card-meaning-snippet {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  margin-bottom: 0.65rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  background: rgba(255, 240, 245, 0.6);
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--pink-soft);
+}
+
+.card-action-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.2rem;
+}
+
+.btn-detail-link {
+  font-family: var(--font-pixel-title);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--pink-vibrant);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform var(--transition-fast);
+}
+
+.card-item:hover .btn-detail-link {
+  transform: translateX(3px);
+  color: var(--pink-dark);
+}
+
+/* ==========================================================================
+   Deck Toggle Button ("Mostrar baraja completa / Ocultar baraja")
+   ========================================================================== */
+.deck-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+.deck-toggle-btn {
+  background: var(--pink-vibrant);
+  color: #ffffff;
+  font-size: 1.05rem;
+  padding: 0.85rem 2.2rem;
+  border: 3px solid var(--border-pixel);
+  box-shadow: var(--shadow-pixel);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.deck-toggle-btn:hover {
+  background: var(--pink-dark);
+  box-shadow: 6px 6px 0px var(--border-pixel);
+  transform: translateY(-2px);
+}
+
+.deck-toggle-btn:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0px var(--border-pixel);
+}
+
+/* ==========================================================================
+   Card Detail Modal
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 18, 51, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog {
+  background: var(--bg-modal);
+  max-width: 760px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2.2rem;
+  position: relative;
+  animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ffffff;
+  border: 2px solid var(--border-pixel);
+  width: 36px;
+  height: 36px;
+  font-family: var(--font-pixel-title);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px var(--border-pixel);
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--pink-vibrant);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.modal-content-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.modal-card-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.modal-card-img {
+  width: 100%;
+  max-width: 170px;
+  aspect-ratio: 1 / 2.22;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--border-pixel);
+  box-shadow: var(--shadow-pixel);
+  background: #2A174A;
+}
+
+.modal-version-tabs {
+  display: flex;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.modal-tab-btn {
+  flex: 1;
+  padding: 0.4rem 0.2rem;
+  font-family: var(--font-pixel-title);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 2px solid var(--pink-pastel);
+  background: #ffffff;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-tab-btn.active {
+  background: var(--pink-vibrant);
+  color: #ffffff;
+  border-color: var(--pink-dark);
+}
+
+.modal-header-tag {
+  font-family: var(--font-pixel-title);
+  font-size: 0.85rem;
+  color: var(--lavender-deep);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  letter-spacing: 1px;
+}
+
+.modal-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid var(--pink-pastel);
+  padding-bottom: 0.5rem;
+}
+
+.modal-spanish-name {
+  font-family: var(--font-pixel-title);
+  font-size: 2rem;
+  color: var(--pink-dark);
+  font-weight: 700;
+}
+
+.modal-card-number {
+  font-family: var(--font-pixel-title);
+  font-size: 1.05rem;
+  color: var(--gold-dark);
+  background: var(--gold-pastel);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 2px solid var(--gold-medium);
+}
+
+.modal-names-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.15rem;
+  font-size: 0.95rem;
+}
+
+.meta-label {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.modal-section-title {
+  font-family: var(--font-pixel-title);
+  font-size: 0.95rem;
+  color: var(--pink-vibrant);
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.modal-meaning-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--pink-pastel);
+  margin-bottom: 1.15rem;
+}
+
+.appearances-badges {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.app-badge {
+  background: #ffffff;
+  border: 2px solid var(--pink-pastel);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.modal-nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px dashed var(--pink-pastel);
+  padding-top: 1.15rem;
+}
+
+/* ==========================================================================
+   Responsive Cards & Modal
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .cards-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .controls-panel {
+    padding: 1.15rem 1rem;
+  }
+
+  .filters-and-toggle-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .version-toggle-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .card-flip-stage {
+    max-width: 110px;
+  }
+
+  .modal-content-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .modal-card-img {
+    max-width: 140px;
+  }
+
+  .modal-title-group {
+    justify-content: center;
+  }
+
+  .appearances-badges {
+    justify-content: center;
+  }
+}

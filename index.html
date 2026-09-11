@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Colección mágica e interactiva de las cartas de Cardcaptor Sakura con estética Pastel Pixel Art. Explora cartas Sakura y Clow, buscador en tiempo real y minijuego de adivinación.">
+  <title>🌸 Cardcaptor Sakura · Colección de Cartas Mágicas</title>
+
+  <!-- Google Fonts: Pixelify Sans / Press Start 2P & Quicksand / Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Pixelify+Sans:wght@400;600;700&family=Press+Start+2P&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pixel-art.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+
+  <!-- Background Animated Petals & Sparkles Canvas -->
+  <canvas id="petalsCanvas" class="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- ========================================== -->
+  <!-- TOP NAVIGATION BAR                         -->
+  <!-- ========================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      <a href="#inicio" class="brand-logo" aria-label="Volver al inicio">
+        <span class="brand-icon">🌸</span>
+        <span class="brand-text">SAKURA <span class="brand-highlight">CARD CAPTOR</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#inicio" class="nav-link active" data-section="inicio">Inicio</a></li>
+          <li class="nav-item"><a href="#coleccion" class="nav-link" data-section="coleccion">Colección</a></li>
+          <li class="nav-item"><a href="#juego" class="nav-link" data-section="juego">Juego</a></li>
+        </ul>
+      </nav>
+
+      <!-- Music/Sound ambient toggle -->
+      <div class="header-extra">
+        <button id="audioToggle" class="pixel-icon-btn" title="Sonido Mágico Ambiente" aria-label="Activar sonido mágico">
+          <span class="sound-icon">✨</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================== -->
+    <!-- 1. SECCIÓN INICIO (HERO PORTADA)           -->
+    <!-- ========================================== -->
+    <section id="inicio" class="hero-section">
+      <!-- Animated Pixel Clouds Background -->
+      <div class="clouds-container" aria-hidden="true">
+        <div class="pixel-cloud cloud-1"></div>
+        <div class="pixel-cloud cloud-2"></div>
+        <div class="pixel-cloud cloud-3"></div>
+        <div class="pixel-cloud cloud-4"></div>
+      </div>
+
+      <div class="hero-content-wrapper">
+        <!-- Sakura Floating Character (Pure Silhouette without frame) -->
+        <div class="hero-character-col">
+          <div class="character-floating-wrapper" id="sakuraWrapper">
+            <img src="assets/images/sakura_silhouette.png" alt="Sakura Kinomoto volando en el cielo con su báculo y alas mágicas" class="sakura-silhouette-img">
+            <div class="floating-magic-stars" aria-hidden="true">
+              <span class="star star-1">✦</span>
+              <span class="star star-2">★</span>
+              <span class="star star-3">✦</span>
+              <span class="star star-4">✧</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Text and CTA Button -->
+        <div class="hero-text-col">
+          <div class="hero-badge pixel-badge">
+            <span>🌸 MUNDO MÁGICO CLOW & SAKURA</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="title-main">SAKURA</span>
+            <span class="title-sub">CARD CAPTOR</span>
+          </h1>
+          <p class="hero-description">
+            Descubre el mundo de las cartas mágicas
+          </p>
+          <div class="hero-actions">
+            <a href="#coleccion" class="pixel-btn cta-btn">
+              <span class="btn-icon">✿</span>
+              <span class="btn-label">Explorar colección</span>
+            </a>
+          </div>
+          <div class="hero-stats-ribbon">
+            <div class="ribbon-item">
+              <span class="ribbon-number">55</span>
+              <span class="ribbon-text">Cartas Mágicas</span>
+            </div>
+            <div class="ribbon-divider">✦</div>
+            <div class="ribbon-item">
+              <span class="ribbon-number">2</span>
+              <span class="ribbon-text">Versiones (Sakura & Clow)</span>
+            </div>
+            <div class="ribbon-divider">✦</div>
+            <div class="ribbon-item">
+              <span class="ribbon-number">100%</span>
+              <span class="ribbon-text">Poder Mágico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll down indicator -->
+      <a href="#coleccion" class="scroll-indicator" aria-label="Desplazarse a la colección">
+        <span class="scroll-arrow">▼</span>
+      </a>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. SECCIÓN COLECCIÓN DE CARTAS             -->
+    <!-- ========================================== -->
+    <section id="coleccion" class="collection-section">
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <span class="deco-star">✦</span>
+          <h2 class="section-title">COLECCIÓN DE CARTAS</h2>
+          <span class="deco-star">✦</span>
+        </div>
+        <p class="section-subtitle">
+          Explora los poderes arcanos, significados y transformaciones de cada carta
+        </p>
+      </div>
+
+      <!-- Interactive Controls Panel -->
+      <div class="controls-panel">
+        <!-- Search Bar -->
+        <div class="search-bar-wrapper">
+          <div class="search-input-group">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input 
+              type="text" 
+              id="cardSearchInput" 
+              class="search-input" 
+              placeholder="Buscar carta por nombre, kanji o significado..."
+              autocomplete="off"
+              aria-label="Buscar carta mágica"
+            >
+            <button id="clearSearchBtn" class="clear-search-btn" title="Limpiar búsqueda" aria-label="Limpiar búsqueda" style="display: none;">✕</button>
+          </div>
+        </div>
+
+        <!-- Filter Chips & Version Toggle Switch -->
+        <div class="filters-and-toggle-row">
+          <!-- Filter Buttons -->
+          <div class="filter-chips-group" role="group" aria-label="Filtrar cartas">
+            <button class="filter-chip active" data-filter="all">
+              <span class="chip-icon">✦</span> Todas
+            </button>
+            <button class="filter-chip" data-filter="sakura">
+              <span class="chip-icon">🌸</span> Sakura
+            </button>
+            <button class="filter-chip" data-filter="clow">
+              <span class="chip-icon">🌙</span> Clow
+            </button>
+          </div>
+
+          <!-- Sakura / Clow Global Toggle Switch -->
+          <div class="version-toggle-container" title="Alternar vista entre Sakura Card y Clow Card">
+            <span class="version-label sakura-version active" id="sakuraLabel">🌸 Sakura ver</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="cardVersionSwitch" aria-label="Alternar versión de carta Sakura y Clow">
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="version-label clow-version" id="clowLabel">🌙 Clow ver</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dynamic Cards Container (Loading / Error / Empty / Grid) -->
+      <div id="cardsGridContainer" class="cards-grid-container" aria-live="polite">
+        <!-- Javascript will inject state or card articles here -->
+      </div>
+
+      <!-- Button: Mostrar baraja completa / Ocultar baraja -->
+      <div class="deck-toggle-wrapper" id="deckToggleWrapper" style="display: none;">
+        <button id="toggleDeckBtn" class="pixel-btn deck-toggle-btn">
+          <span id="toggleDeckBtnText">✦ MOSTRAR BARAJA COMPLETA ✦</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. SECCIÓN JUEGO: ¿QUÉ CARTA CLOW ERES?    -->
+    <!-- ========================================== -->
+    <section id="juego" class="game-section">
+      <!-- Mystical Night Sky Background Stars -->
+      <div class="mystic-stars-bg" aria-hidden="true"></div>
+
+      <div class="game-content-wrapper">
+        <div class="game-header">
+          <div class="game-badge">🔮 ORÁCULO DE CLOW</div>
+          <h2 class="game-title">✦ ¿QUÉ CARTA CLOW ERES? ✦</h2>
+          <p class="game-subtitle">Deja que el destino elija una carta para ti...</p>
+        </div>
+
+        <!-- Horizontal Game Arena (Optimized for PC Desktop Screen) -->
+        <div class="game-horizontal-layout pixel-box">
+          <!-- Rotating Magic Circle Background -->
+          <div class="magic-circle-rune" id="magicRune" aria-hidden="true"></div>
+
+          <!-- Column 1: Divination 3D Card Display -->
+          <div class="game-card-col">
+            <div class="divination-card-stage" id="divinationCardStage">
+              <div class="divination-card-3d" id="divinationCard">
+                <!-- Card Back (Initial State) -->
+                <div class="divination-face divination-back" id="divinationBackFace">
+                  <div class="clow-back-ornament">
+                    <div class="clow-sun-moon-emblem">🌙 ✦ ☀️</div>
+                    <span class="clow-seal-text">CLOW REED SEAL</span>
+                  </div>
+                </div>
+
+                <!-- Card Front (Revealed State with Real Clow Card Image) -->
+                <div class="divination-face divination-front" id="divinationFrontFace">
+                  <img id="divinationCardImg" src="https://i.ibb.co/LJSmQ4f/Reverso-Clow.jpg" alt="Carta Clow revelada" class="divination-img">
+                  <span class="divination-chip-tag">🌙 CLOW</span>
+                </div>
+              </div>
+            </div>
+            <div class="game-card-hint" id="gameCardHint">
+              <span>✦ Reverso de la Clow Card ✦</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Information & Unified Action Button -->
+          <div class="game-info-col">
+            <!-- Initial Prompt State (Before first click) -->
+            <div id="gameIntroBox" class="game-intro-box">
+              <div class="intro-badge">✨ DESTINO MÁGICO</div>
+              <h3 class="intro-title">¿Listo para conocer tu carta?</h3>
+              <p class="intro-description">
+                Concentra tu energía mágica y presiona el botón para consultar el antiguo Libro de Clow Reed.
+              </p>
+            </div>
+
+            <!-- Loading Spinner State (During casting animation) -->
+            <div id="gameCastingBox" class="game-casting-box" style="display: none;">
+              <div class="wand-spinner">⭐</div>
+              <p class="casting-text">Consultando los astros de Clow Reed...</p>
+            </div>
+
+            <!-- Card Result Details Box (Same visual structure as Collection) -->
+            <div id="gameDetailsBox" class="game-details-box" style="display: none;">
+              <div class="result-header-row">
+                <span class="result-badge">✦ TE HA TOCADO ✦</span>
+                <span id="resultCardNumber" class="result-number-badge">N.º 01</span>
+              </div>
+
+              <h3 id="resultSpanishName" class="result-spanish-name">VIENTO</h3>
+
+              <div class="result-subnames-row">
+                <span id="resultEnglishName" class="result-english-name">The Windy</span>
+                <span class="result-divider">·</span>
+                <span id="resultKanjiRomaji" class="result-kanji-romaji">風 · Kaze</span>
+              </div>
+
+              <div class="result-meaning-box">
+                <h4 class="result-meaning-label">SIGNIFICADO</h4>
+                <p id="resultMeaning" class="result-meaning-text">
+                  « Simboliza la libertad, el movimiento y nuevos comienzos. »
+                </p>
+              </div>
+
+              <div class="result-appearances-row">
+                <span id="resultAnime" class="app-tag">📺 Anime: Ep. 01</span>
+                <span id="resultManga" class="app-tag">📖 Manga: Tomo 01</span>
+              </div>
+            </div>
+
+            <!-- Unified Interactive Button (Changes text from ADIVINAR to VOLVER A BARAJAR) -->
+            <div class="game-action-wrapper">
+              <button id="gameActionBtn" class="pixel-btn game-action-btn">
+                <span class="btn-sparkle">✨</span>
+                <span id="gameActionBtnText" class="btn-text">ADIVINAR</span>
+                <span class="btn-sparkle">✨</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- CARD DETAIL MODAL (DRAWER POPUP)           -->
+  <!-- ========================================== -->
+  <div id="cardDetailModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-dialog pixel-box">
+      <button id="closeModalBtn" class="modal-close-btn" aria-label="Cerrar detalle de la carta">✕</button>
+      
+      <div class="modal-content-grid">
+        <!-- Visual Card Presentation with Flip/Switch in Modal -->
+        <div class="modal-image-col">
+          <div class="modal-card-display">
+            <img id="modalCardImg" src="" alt="Carta mágica en detalle" class="modal-card-img">
+            <div class="modal-version-tabs">
+              <button id="modalTabSakura" class="modal-tab-btn active">🌸 Ver Sakura</button>
+              <button id="modalTabClow" class="modal-tab-btn">🌙 Ver Clow</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Detailed Information -->
+        <div class="modal-info-col">
+          <div class="modal-header-tag">DETALLE DE LA CARTA</div>
+          <div class="modal-title-group">
+            <h3 id="modalSpanishName" class="modal-spanish-name">VIENTO</h3>
+            <span id="modalCardNumber" class="modal-card-number">N.º 01</span>
+          </div>
+
+          <div class="modal-names-meta">
+            <p class="meta-item"><strong class="meta-label">Inglés:</strong> <span id="modalEnglishName">The Windy</span></p>
+            <p class="meta-item"><strong class="meta-label">Japonés / Romaji:</strong> <span id="modalKanjiRomaji">風 · Kaze</span></p>
+          </div>
+
+          <div class="modal-meaning-section">
+            <h4 class="modal-section-title">✦ SIGNIFICADO</h4>
+            <p id="modalMeaning" class="modal-meaning-text">
+              Simboliza la libertad, el movimiento y nuevos comienzos.
+            </p>
+          </div>
+
+          <div class="modal-appearances-section">
+            <h4 class="modal-section-title">✦ APARECE EN</h4>
+            <div class="appearances-badges">
+              <div class="app-badge"><span class="app-icon">📺</span> <span class="app-label">Anime:</span> <strong id="modalAnimeApp">Episodio 01</strong></div>
+              <div class="app-badge"><span class="app-icon">📖</span> <span class="app-label">Manga:</span> <strong id="modalMangaApp">Capítulo 01</strong></div>
+            </div>
+          </div>
+
+          <div class="modal-nav-buttons">
+            <button id="modalPrevCardBtn" class="pixel-mini-btn" title="Carta anterior">◄ Anterior</button>
+            <button id="modalNextCardBtn" class="pixel-mini-btn" title="Carta siguiente">Siguiente ►</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FOOTER                                     -->
+  <!-- ========================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">🌸 SAKURA CARD CAPTOR</div>
+        <p class="footer-quote">
+          « ¡Llave que guardas el poder de mi estrella, muestra tu verdadera forma ante Sakura! ¡LIBÉRATE! »
+        </p>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#coleccion">Colección</a></li>
+          <li><a href="#juego">Juego Clow</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-credits">
+        <div class="pixel-decorations">✧ 🌸 ✦ 🌙 ✧</div>
+        <p class="credits-text">
+          Proyecto Frontend · Inspirado en CLAMP
+        </p>
+        <p class="tech-stack-text">
+          Desarrollado con HTML5 Semántico, CSS3 & JavaScript Vanilla
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/collection.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
