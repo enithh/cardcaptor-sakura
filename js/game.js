@@ -163,12 +163,40 @@ async function performDivination() {
   const randomIndex = Math.floor(Math.random() * cards.length);
   const selectedCard = cards[randomIndex];
 
-  // Configurar imagen frontal real de la Clow Card
-  const targetImg = selectedCard.clowCard || selectedCard.sakuraCard;
-  if (divinationCardImg) {
-    divinationCardImg.src = targetImg;
-    divinationCardImg.alt = `Clow Card ${selectedCard.spanishName}`;
-  }
+  // Configurar una nueva imagen para la Clow Card seleccionada
+const targetImg = selectedCard.clowCard || selectedCard.sakuraCard;
+
+if (divinationCardImg && targetImg) {
+  const newImg = document.createElement('img');
+
+  newImg.id = 'divinationCardImg';
+  newImg.className = 'divination-img';
+  newImg.alt = `Clow Card ${selectedCard.spanishName}`;
+
+  // Agregamos un parámetro único para evitar que el navegador
+  // conserve visualmente la imagen anterior.
+  const separator = targetImg.includes('?') ? '&' : '?';
+  const freshImageUrl = `${targetImg}${separator}gameCard=${Date.now()}`;
+
+  newImg.src = freshImageUrl;
+
+  // Reemplazar completamente el elemento anterior
+  divinationCardImg.replaceWith(newImg);
+
+  // Actualizar la referencia global al nuevo elemento
+  divinationCardImg = newImg;
+
+  // Esperar a que la imagen nueva esté cargada
+  await new Promise((resolve) => {
+    if (newImg.complete) {
+      resolve();
+      return;
+    }
+
+    newImg.onload = resolve;
+    newImg.onerror = resolve;
+  });
+}
 
   // Poblar información del resultado
   if (resultSpanishName) resultSpanishName.textContent = selectedCard.spanishName;
